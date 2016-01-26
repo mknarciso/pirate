@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :chairs
+  resources :grads
   resources :courses
   resources :schools
   get 'pages/home', to: 'pages#home'
