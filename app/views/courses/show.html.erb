@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
-
-<p>
-  <strong>Hours:</strong>
-  <%= @course.hours %>
-</p>
-
-<p>
-  <strong>Desc:</strong>
-  <%= @course.desc %>
-</p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<div class="container">
+  
+  <p id="notice"><%= notice %></p>
+  <div class="container well">
+    <p>
+      <strong>Escola:</strong>
+      <%= School.find(@course.school_id).name %>
+    </p>
+    <p>
+      <strong>Nome:</strong>
+      <%= @course.name %>
+    </p>
+    
+    <p>
+      <strong>Horas/Aula:</strong>
+      <%= @course.hours %>
+    </p>
+    
+    <p>
+      <strong>Descrição:</strong>
+      <%= @course.desc %>
+    </p>
+  </div>
+  <%= link_to 'Editar', edit_course_path(@course) %> |
+  <%= link_to 'Voltar', courses_path %>
+</div>
