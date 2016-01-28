@@ -1,46 +1,46 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
-  <div class="text-center">
-    <h1>Cursos Cadastrados</h1>
-  </div>
-  
-  <div class="container well">
-  
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-2">
+
+<h1>Cursos Cadastrados</h1>
+
+
+<div class="container well">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-sm-2">
           Nome
-        </div>      
-        <div class="col-sm-2">
+        </th>      
+        <th class="col-sm-2">
           Horas aula
-        </div>
-        <div class="col-sm-2">
+        </th>
+        <th class="col-sm-7">
           Descrição
-        </div>
-      </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
       <% @courses.each do |course| %>
-      <hr>
-        <div class="row">
-          <div class="col-sm-2">
+        <tr>
+        
+          <td>
             <%= link_to "#{course.name}", course %>
-          </div>
-          <div class="col-sm-2">
+          </td>
+          <td>
             <%= course.hours %>
-          </div>
-          <div class="col-sm-6">
+          </td>
+          <td>
             <%= course.desc %>
-          </div>
+          </td>
   
-          <div class="col-sm-1">
-            <%= link_to 'Editar', edit_course_path(course), type: "button", class: "btn btn-primary btn-xs" %>
-          </div>
-          <div class="col-sm-1">
-            <%= link_to 'Deletar', course, type: "button", class: "btn btn-danger btn-xs", method: :delete, data: { confirm: 'Tem certeza?' } %>
-          </div>
-        </div>
+          <td>
+            <%= link_to 'Editar', edit_course_path(course), type: "button", class: "label label-primary" %>
+            <%= link_to 'Deletar', course, type: "button", class: "label label-danger", method: :delete, data: { confirm: 'Tem certeza?' } %>
+          </td>
+        </tr>
       <% end %>
-    </div>
-  </div>
-  
-  <%= link_to 'Novo Curso', new_course_path, type: "button", class: "btn btn-success btn-sm"  %>
+    </tbody>
+  </table>
 </div>
+
+
+<%= link_to 'Novo Curso', new_course_path, type: "button", class: "btn btn-success btn-sm"  %>

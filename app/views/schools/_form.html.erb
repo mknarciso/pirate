@@ -1,33 +1,45 @@
-<%= form_for(@school) do |f| %>
-  <% if @school.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
-
-      <ul>
-      <% @school.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="container well">
+  <%= form_for @school, html: {class: "form-horizontal"} do |f| %>
+    <% if @school.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
+  
+        <ul>
+        <% @school.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.label :Nome, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :Cidade, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :"Pública", class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.check_box :public %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :Site, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :website, class: "form-control" %>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="form-group">
+        <%= f.submit :Salvar, class: "btn btn-default col-sm-2 col-sm-offset-9" %>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :public %><br>
-    <%= f.check_box :public %>
-  </div>
-  <div class="field">
-    <%= f.label :website %><br>
-    <%= f.text_field :website %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

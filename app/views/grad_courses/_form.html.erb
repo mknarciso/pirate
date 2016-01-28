@@ -1,0 +1,36 @@
+
+<h2><%= @grad.name %><small></br><%= @grad.school.name %></small></h2>
+
+
+<div class="container well">
+  <%= form_for @grad, html: {class: "form-horizontal"} do |f| %>
+    <% if @grad.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@grad.errors.count, "error") %> prohibited this grad from being saved:</h2>
+  
+        <ul>
+        <% @grad.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% (1..@grad.max).each do |semester| %>
+        <div class="form-group">
+            <%= f.label :course_ids, "#{semester}º semestre", class: "col-sm-2 control-label"  %>
+            <div class="col-sm-10">
+              <%= f.collection_select :course_ids, @courses, :id, :name, {include_blank: true}, {multiple: true, :class=>'chosen-select form-control'} %>
+            </div>
+        </div>
+         
+    <% end %>
+    
+    <div class="actions">
+      <div class="form-group">
+        <%= f.submit :Salvar, class: "btn btn-default col-sm-2 col-sm-offset-9" %>
+      </div>
+      
+    </div>
+  <% end %>
+</div>

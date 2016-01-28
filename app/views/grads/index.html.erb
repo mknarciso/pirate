@@ -1,31 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing grads</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Min</th>
-      <th>Max</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h1>Lista de Currículos</h1>
 
-  <tbody>
-    <% @grads.each do |grad| %>
+<div class="container well">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= grad.name %></td>
-        <td><%= grad.min %></td>
-        <td><%= grad.max %></td>
-        <td><%= link_to 'Show', grad %></td>
-        <td><%= link_to 'Edit', edit_grad_path(grad) %></td>
-        <td><%= link_to 'Destroy', grad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Nome</th>
+        <th>Escola</th>
+        <th>Mínimo</th>
+        <th>Máximo</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @grads.each do |grad| %>
+        <tr>
+          <td class="col-sm-4">
+            <%= link_to "#{grad.name}", grad %>
+          </td>      
+          <td class="col-sm-4">
+            <%= link_to "#{grad.school.name}", school_path(grad.school_id) %>
+          </td>  
+          <td class="col-sm-1">
+            <%= grad.min %>
+          </td>      
+          <td class="col-sm-1">
+            <%= grad.max %>
+          </td>
+          <td class="col-sm-1">
+            <%= link_to 'Adicionar Cursos', edit_grad_course_path(grad), type: "button", class: "label label-success" %>
+            <%= link_to 'Editar', edit_grad_path(grad), type: "button", class: "label label-primary" %>
+            <%= link_to 'Deletar', grad, type: "button", class: "label label-danger", method: :delete, data: { confirm: 'Tem certeza?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<br>
-
-<%= link_to 'New grad', new_grad_path %>
+<%= link_to 'Novo Currículo', new_grad_path, type: "button", class: "btn btn-success btn-sm"  %>

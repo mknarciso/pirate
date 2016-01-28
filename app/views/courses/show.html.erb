@@ -1,26 +1,48 @@
-<div class="container">
-  
-  <p id="notice"><%= notice %></p>
-  <div class="container well">
-    <p>
+<p id="notice"><%= notice %></p>
+<h1><%= @course.name %></h1>
+<div class="container well">
+  <div class="row">
+    <div class="col-sm-1">
       <strong>Escola:</strong>
-      <%= School.find(@course.school_id).name %>
-    </p>
-    <p>
-      <strong>Nome:</strong>
-      <%= @course.name %>
-    </p>
-    
-    <p>
-      <strong>Horas/Aula:</strong>
-      <%= @course.hours %>
-    </p>
-    
-    <p>
-      <strong>Descrição:</strong>
-      <%= @course.desc %>
-    </p>
+    </div>
+    <div class="col-sm-11">
+      <%= link_to "#{@course.school.name}", school_path(@course.school_id) %>
+    </div>
   </div>
-  <%= link_to 'Editar', edit_course_path(@course) %> |
-  <%= link_to 'Voltar', courses_path %>
+  
+  <div class="row">
+    <div class="col-sm-1">
+      <strong>Horas/Aula:</strong>
+    </div>
+    <div class="col-sm-11">
+      <%= @course.hours %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-1">
+      <strong>Descrição:</strong>
+    </div>
+    <div class="col-sm-11">
+      <%= @course.desc %>
+    </div>
+  </div> 
+  
+  <% if @course.grads.any? %>
+    <div class="row">
+      <div class="col-sm-1">
+        <strong>Graduações:</strong>
+      </div>
+      <div class="col-sm-11">
+        <ul class="list-inline">
+          <%= render @course.grads %>
+        </ul>
+      </div>
+    </div>
+
+  <% end %>
+  
 </div>
+<%= link_to 'Editar', edit_course_path(@course) %> |
+<%= link_to 'Voltar', courses_path %> | 
+<%= link_to 'Novo Curso', new_course_path %>

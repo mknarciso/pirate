@@ -69,6 +69,7 @@ class GradsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grad_params
-      params.require(:grad).permit(:name, :min, :max)
+      params.require(:grad).permit(:name, :min, :max, :school_id )
     end
+
 end
