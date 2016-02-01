@@ -2,6 +2,7 @@ class GradCoursesController < ApplicationController
   before_action :set_grad, :set_courses
 
   def edit
+    set_grad
   end
   
   # PATCH/PUT /grads/1
@@ -10,6 +11,7 @@ class GradCoursesController < ApplicationController
     respond_to do |format|
       if @grad.update(grad_params)
         format.html { redirect_to @grad, notice: 'Cursos adicionados com sucesso' }
+        debug(grad_params)
       else
         format.html { render :edit }
       end
@@ -28,7 +30,8 @@ class GradCoursesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def grad_params
-      params.require(:grad).permit(:name, :min, :max, :school_id )
+      params.require(:grad).permit(:name, :min, :max, :school_id, grad_courses_attributes: [:id, :course_id, :grad_id, :semester ] )
+      
     end
   
 end

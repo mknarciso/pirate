@@ -15,15 +15,17 @@
         </ul>
       </div>
     <% end %>
+    
 
-    <% (1..@grad.max).each do |semester| %>
+
+    <% (1..@grad.max).each do |sem| %>
         <div class="form-group">
-            <%= f.label :course_ids, "#{semester}º semestre", class: "col-sm-2 control-label"  %>
+            <%= f.label :course_ids, "#{sem}º semestre", class: "col-sm-2 control-label"  %>
             <div class="col-sm-10">
               <%= f.collection_select :course_ids, @courses, :id, :name, {include_blank: true}, {multiple: true, :class=>'chosen-select form-control'} %>
+              <%= f.hidden_field :semester, :value => sem %>
             </div>
         </div>
-         
     <% end %>
     
     <div class="actions">
