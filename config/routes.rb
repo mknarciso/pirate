@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
   resources :grads
-  resources :grad_courses, only: [:edit, :update]
+  resources :grad_courses, only: [:edit]
   resources :courses
   resources :schools
-
+  post 'grad_courses/:id', to: 'grad_courses#update'
   get 'pages/home', to: 'pages#home'
   root 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

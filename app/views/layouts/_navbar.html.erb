@@ -10,8 +10,9 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand">
-        <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-        <%= link_to " Escola Pirata", root_path, id:"logo" %>
+        <%= link_to root_path do %>
+          <%= image_tag "LOGO_WIDE.png", id:"logo_img" %>
+        <% end %>
       </div>
     </div>
 

@@ -1,0 +1,51 @@
+
+<h2><%= @grad.name %><small></br><%= @grad.school.name %></small></h2>
+
+
+<div class="container well">
+  <%= form_for @grad, html: {class: "form-horizontal"} do |f| %>
+
+    <%= @courses %>
+    <%= @gc %>
+    <% (1..@grad.max).each do |sem| %>
+        <div class="form-group col-sm-4">
+            <h3><%= "#{sem}º semestre" %></h3>
+            <div class="col-sm-12">
+              <%= f.collection_select :courses, @courses, :id, :name, {:include_blank => true, :selected => @gc }, {multiple: true, :class=>'chosen-select form-control'}  %>
+                  
+              <%= f.fields_for :grad_courses do |builder| %>
+                <% if builder.object.semester == sem %>
+                  <div class="col-sm-9">
+                    <%= builder.collection_select :course_id, @courses, :id, :name, {include_blank: true}, {multiple: false, :class=>'chosen-select form-control'} %>
+                  </div>
+                  <div class="col-sm-3">
+                    <%= builder.select :semester, (1..@grad.max), {include_blank: true}, {multiple: false, :class=>'form-control'} %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+        </div>
+    <% end %>
+    <div class="form-group col-sm-6">
+        <h3><%= "Semestre não definido" %></h3>
+        <div class="col-sm-12">
+          <%= f.fields_for :grad_courses do |builder| %>
+            <% if builder.object.semester == nil %>
+              <div class="col-sm-9">
+                <%= builder.collection_select :course_id, @courses, :id, :name, {include_blank: true}, {multiple: false, :class=>'chosen-select form-control'} %>
+              </div>
+              <div class="col-sm-3">
+                <%= builder.select :semester, (1..@grad.max), {include_blank: true}, {multiple: false, :class=>'form-control'} %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    </div>
+    <div class="actions">
+      <div class="form-group">
+        <%= f.submit :Salvar, class: "btn btn-default col-sm-2 col-sm-offset-9" %>
+      </div>
+      
+    </div>
+  <% end %>
+</div>

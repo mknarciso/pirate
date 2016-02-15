@@ -9,28 +9,24 @@
       <tr>
         <th>Nome</th>
         <th>Escola</th>
-        <th>Mínimo</th>
-        <th>Máximo</th>
+        <th>Semestres</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% @grads.each do |grad| %>
         <tr>
-          <td class="col-sm-4">
+          <td>
             <%= link_to "#{grad.name}", grad %>
           </td>      
-          <td class="col-sm-4">
+          <td>
             <%= link_to "#{grad.school.name}", school_path(grad.school_id) %>
           </td>  
-          <td class="col-sm-1">
-            <%= grad.min %>
-          </td>      
-          <td class="col-sm-1">
+          <td>
             <%= grad.max %>
           </td>
-          <td class="col-sm-1">
-            <%= link_to 'Adicionar Cursos', edit_grad_course_path(grad), type: "button", class: "label label-success" %>
+          <td>
+            <%= link_to 'Editar Semestres', edit_grad_course_path(grad), type: "button", class: "label label-success" %>
             <%= link_to 'Editar', edit_grad_path(grad), type: "button", class: "label label-primary" %>
             <%= link_to 'Deletar', grad, type: "button", class: "label label-danger", method: :delete, data: { confirm: 'Tem certeza?' } %>
           </td>

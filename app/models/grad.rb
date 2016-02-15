@@ -7,3 +7,4 @@ class Grad < ActiveRecord::Base
     accepts_nested_attributes_for :courses,
     allow_destroy: true
 end
+

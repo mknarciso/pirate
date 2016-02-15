@@ -42,7 +42,7 @@ class GradsController < ApplicationController
   def update
     respond_to do |format|
       if @grad.update(grad_params)
-        format.html { redirect_to @grad, notice: 'Grad was successfully updated.' }
+        format.html { redirect_to edit_grad_course_path(@grad.id), notice: 'Grad was successfully updated.' }
         format.json { render :show, status: :ok, location: @grad }
       else
         format.html { render :edit }

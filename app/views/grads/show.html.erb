@@ -1,34 +1,52 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @grad.name %></h1>
 <div class="container well">
-  <div class="row">
-    <div class="col-sm-1">
-      <strong>Escola</strong>
-    </div>
-    <div class="col-sm-11">
-      <%= link_to "#{@grad.school.name}", school_path(@grad.school_id) %>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-sm-1">
-      <strong>Tempo</strong>
-    </div>
-    <div class="col-sm-11">
-      De <%= @grad.min %> a <%= @grad.max %> semestres.
-    </div>
-  </div> 
-  
+  <h4><%= link_to "#{@grad.school.name}", school_path(@grad.school_id) %></h4>
   <% if @grad.courses.any? %>
     <div class="row">
-      <div class="col-sm-1">
-        <strong>Cursos:</strong>
-      </div>
-      <div class="col-sm-11">
-        <ul class="list-inline">
-          <%= render @grad.courses %>
-        </ul>
-        
+      <div class="col-sm-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <% (1..5).each do |sem| %>
+                <th width="20%"><%= "#{sem}º Semestre" %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <% (1..5).each do |sem| %>
+                <% @sem = sem %>
+                  <td>
+                    <% @grad.grad_courses.where(semester: @sem).each do |gc| %>
+                      <%= link_to gc.course.name, gc.course, type: "button", class: "label label-info" %></br>
+                    <% end %>
+                  </td>
+              <% end %>
+            </tr> 
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <% (6..@grad.max).each do |sem| %>
+                <th width="20%"><%= "#{sem}º Semestre" %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <% (6..@grad.max).each do |sem| %>
+                <% @sem = sem %>
+                  <td>
+                    <% @grad.grad_courses.where(semester: @sem).each do |gc| %>
+                      <%= link_to gc.course.name, gc.course, type: "button", class: "label label-info" %></br>
+                    <% end %>
+                  </td>
+              <% end %>
+            </tr> 
+          </tbody>
+        </table>
       </div>
     </div>
 

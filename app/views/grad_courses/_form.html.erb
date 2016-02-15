@@ -1,36 +1,24 @@
 
 <h2><%= @grad.name %><small></br><%= @grad.school.name %></small></h2>
 
-
+<p id="notice"><%= notice %></p>
 <div class="container well">
-  <%= form_for @grad, html: {class: "form-horizontal"} do |f| %>
-    <% if @grad.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@grad.errors.count, "error") %> prohibited this grad from being saved:</h2>
-  
-        <ul>
-        <% @grad.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-    
-
+  <%= form_tag "/grad_courses/#{@grad.id}", html: {class: "form-horizontal"} do %>
 
     <% (1..@grad.max).each do |sem| %>
-        <div class="form-group">
-            <%= f.label :course_ids, "#{sem}º semestre", class: "col-sm-2 control-label"  %>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-2">
+              <strong><%= "#{sem}º semestre" %></strong>
+            </div>
             <div class="col-sm-10">
-              <%= f.collection_select :course_ids, @courses, :id, :name, {include_blank: true}, {multiple: true, :class=>'chosen-select form-control'} %>
-              <%= f.hidden_field :semester, :value => sem %>
+              <%= select_tag("courses[#{sem}]", options_from_collection_for_select( @courses, :id, :name, @gc.where(semester: sem).map { |k| k.course_id }), { multiple: true, :class=>'chosen-select form-control'})  %>
             </div>
         </div>
     <% end %>
-    
+
     <div class="actions">
       <div class="form-group">
-        <%= f.submit :Salvar, class: "btn btn-default col-sm-2 col-sm-offset-9" %>
+        <%= submit_tag "Salvar", class: "btn btn-default col-sm-2 col-sm-offset-9" %>
       </div>
       
     </div>
