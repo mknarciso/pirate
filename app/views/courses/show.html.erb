@@ -34,9 +34,21 @@
         <strong>Graduações:</strong>
       </div>
       <div class="col-sm-11">
-        <div class="list-inline">
-          <%= render @course.grads %>
-        </ul>
+        <%= render @course.grads.uniq %>
+        
+      </div>
+    </div>
+
+  <% end %>
+  
+  <% if @course.requirements.any? %>
+    <div class="row">
+      <div class="col-sm-1">
+        <strong>Requisitos:</strong>
+      </div>
+      <div class="col-sm-11">
+        <%= render @course.requirements %>
+        
       </div>
     </div>
 

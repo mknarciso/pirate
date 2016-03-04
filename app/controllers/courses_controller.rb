@@ -40,6 +40,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    course_params
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
@@ -65,10 +66,11 @@ class CoursesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
+      @courses = Course.where(school_id: @course.school_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :hours, :desc, :school_id)
+      params.require(:course).permit(:name, :hours, :desc, :school_id, requirement_ids: [])
     end
 end
